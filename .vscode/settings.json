@@ -6,6 +6,7 @@
         "nltk",
         "pdfminer",
         "psycopg",
-        "punkt"
+        "punkt",
+        "tablefmt"
     ]
 }

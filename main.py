@@ -28,8 +28,7 @@ def index(pdf_file):
 @click.argument("query")
 def search(query):
     results = processor.search(query)
-    for result in results:
-        print(f"{result[0]} (Score: {round(result[1], 4)})")
+    print(results)
 
 
 cli.add_command(index)

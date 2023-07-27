@@ -11,6 +11,7 @@ import json
 import datetime
 import hashlib
 import re
+from tabulate import tabulate
 
 
 def get_punkt():
@@ -59,7 +60,10 @@ class PDFProcessor:
                 self.clean_sentence(sentence) for sentence in sentences if sentence
             ]
 
-            embeddings = self.model.encode(sentences)
+            embeddings = self.model.encode(
+                sentences,
+                show_progress_bar=True,
+            )
 
             data = [
                 (
@@ -100,15 +104,22 @@ class PDFProcessor:
 
         self.cursor.execute(
             """
-            SELECT content, embedding <-> %s::vector AS distance
+             SELECT content, 1 - (embedding <=> '"""
+            + embedding_query
+            + """') AS cosine_similarity
             FROM documents
-            ORDER BY distance ASC
+            ORDER BY cosine_similarity DESC
             LIMIT 10
             """,
-            [embedding_query],
         )
         results = self.cursor.fetchall()
-        return results
+        table = tabulate(
+            results,
+            headers=["Sentence", "Cosine Similarity"],
+            tablefmt="orgtbl",
+            showindex=True,
+        )
+        return table
 
     @staticmethod
     def compute_file_hash(file_path):
