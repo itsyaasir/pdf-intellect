@@ -13,4 +13,4 @@ conda install -c pytorch torch torchvision torchaudio -y
 conda install -c pytorch faiss-cpu -y
 
 # Install other necessary packages with pip
-pip3 install sentence-transformers psycopg2-binary sqlalchemy pgvector python-magic pdfminer.six nltk tabulate
+pip3 install -r requirements.txt

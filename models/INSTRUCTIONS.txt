@@ -1,0 +1,2 @@
+Place your models in this folder and edit the config file to point to the correct location. The config file is located in `src/config.py`.
+
