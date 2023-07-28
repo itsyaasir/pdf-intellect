@@ -1,7 +1,7 @@
 
 ---
 
-# PDF Embedding Indexer
+# PDF Intellect
 
 PDF Embedding Indexer is a CLI tool designed to process text content from PDF files, generate meaningful embeddings from the text using Sentence Transformers, and store those embeddings in a PostgreSQL database. This allows for quick and efficient similarity searching, providing a useful tool for managing and navigating through a large number of PDF files.
 
