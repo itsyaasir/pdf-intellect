@@ -161,5 +161,6 @@ cython_debug/
 
 # File in models
 models/*.bin
+models/*.gguf
 
 .vscode

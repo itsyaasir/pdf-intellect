@@ -57,7 +57,6 @@ class LLMWrapper:
         Query the LLM based on the content found in the PDF documents.
         """
         final_prompt = prompt.format(question=question, context=context)
-        print(final_prompt)
         return self.chain.run(final_prompt)
 
     def set_temperature(self, temperature):
