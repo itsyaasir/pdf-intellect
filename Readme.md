@@ -7,6 +7,7 @@ PDF Embedding Indexer is a CLI tool designed to process text content from PDF fi
 
 ## Features
 
+- Currently supports PDF files only, and is only limited to a single PDF file per command.
 - Extracts text content from PDF files and generates embeddings using Sentence Transformers.
 - Stores the embeddings in a PostgreSQL database for quick and efficient similarity searching.
 - Allows for sentence-level indexing, offering granular search results.
@@ -34,13 +35,13 @@ PDF Embedding Indexer is a CLI tool designed to process text content from PDF fi
 3. Clone this repository:
 
     ```bash
-    git clone https://github.com/itsyaasir/pdf-embedding-indexer.git
+    git clone https://github.com/itsyaasir/pdf-intellect.git
     ```
 
 4. Change into the project directory:
 
     ```bash
-    cd pdf-embedding-indexer
+    cd pdf-intellect
     ```
 
 5. You can create and activate a Conda or a virtual environment:
@@ -82,24 +83,35 @@ PDF Embedding Indexer is a CLI tool designed to process text content from PDF fi
 
 6. Run the provided setup script to setup the database:
 
+    You will need to prov
+
     ```bash
     bash db_setup.sh
     ```
 
-7. Modify the database parameters (`DB_PARAMS`) in `index.py` if necessary.
+7. Modify the environment variables in `config.py` if necessary.
+
+8. Depending on your model, you might need to adjust the prompt template to match the model's input format.
+    You can check the default template in `app/llama.py`.
 
 ## Usage
 
 To index a PDF:
 
-```
-python index.py index <pdf_file>
+```bash
+python main.py index <pdf_file>
 ```
 
 To search for similar content given a query:
 
+```bash
+python main.py search "<query>"
 ```
-python index.py search "<query>"
+
+To use the PDF with LLM:
+
+```bash
+python main.py query <"query">
 ```
 
 These commands will print their results to the console.

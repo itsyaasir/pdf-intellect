@@ -6,7 +6,7 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from sqlalchemy import text
 from app.utils import compute_file_hash, convert_pdf_to_text, get_punkt
 from app.utils import split_text
-import config
+import app.config as config
 
 
 class PDFProcessor:
@@ -101,5 +101,14 @@ class PDFProcessor:
 
         :param query: The string to search for.
         """
-        results = self.vector_store.similarity_search(query, 10)
+        results = self.vector_store.similarity_search(query, 5)
         return results
+
+    def search_str_without_md(self, query: str):
+        """
+        Search for a string in the PDF documents.
+
+        :param query: The string to search for.
+        """
+        results = self.vector_store.similarity_search(query, 5)
+        return [result.page_content for result in results]

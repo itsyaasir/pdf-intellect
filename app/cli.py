@@ -4,7 +4,7 @@ This module contains the CLI for the PDF processor.
 
 import textwrap
 import click
-import config
+import app.config as config
 from app.llama import LLMWrapper
 from app.processor import PDFProcessor
 
@@ -58,7 +58,11 @@ def query(prompt: str):
 
     """
     # Search for the topic in the database
-    context = pdf_processor.search_str(prompt)
+    context = pdf_processor.search_str_without_md(prompt)
+    print(context)
+    if not context:
+        print("Topic not found in the database.")
+        return
 
     llm = LLMWrapper(
         model_path=config.LLM_MODEL_PATH,
